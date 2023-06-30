@@ -7,21 +7,20 @@
 // Execute `rustlings hint move_semantics2` or use the `hint` watch subcommand
 // for a hint.
 
-// I AM NOT DONE
 
 fn main() {
     let vec0 = Vec::new();
 
-    let mut vec1 = fill_vec(vec0);
+    let mut vec1 = fill_vec(vec0.clone()); // vec1 has taken ownership of a clone of vec0, but vec0 ownership hasn't changed
 
-    println!("{} has length {}, with contents: `{:?}`", "vec0", vec0.len(), vec0);
+    println!("{} has length {}, with contents: `{:?}`", "vec0", vec0.len(), vec0); // we can still use vec0 now!
 
     vec1.push(88);
 
     println!("{} has length {}, with contents `{:?}`", "vec1", vec1.len(), vec1);
 }
 
-fn fill_vec(vec: Vec<i32>) -> Vec<i32> {
+fn fill_vec(vec: Vec<i32>) -> Vec<i32> { // this parameter takes ownership of the value so you need to pass a cloned arg
     let mut vec = vec;
 
     vec.push(22);
@@ -30,3 +29,4 @@ fn fill_vec(vec: Vec<i32>) -> Vec<i32> {
 
     vec
 }
+

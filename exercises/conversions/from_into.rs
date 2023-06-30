@@ -7,6 +7,8 @@
 // Execute `rustlings hint from_into` or use the `hint` watch subcommand for a
 // hint.
 
+// I AM NOT DONE
+
 #[derive(Debug)]
 struct Person {
     name: String,
@@ -40,10 +42,48 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of
 // Person Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
+// The `impl` keyword is used to specify an implementation block for a trait or a type.
+// In this case, it's used to implement the `From<&str>` trait for the Person type.
+
+// `From<&str>` is the trait being implemented. It indicates that instances of `Person` can be created from references to string slices (`&str`).
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        // 1. If the length of the provided string is 0, then return the default of
+        //    Person.
+        if s.len() == 0 {
+            return Person::default()
+        } 
+
+        // 2. Split the given string on the commas present in it.
+        let parts: Vec<&str> = s.split(',').collect();
+
+        // 3. Extract the first element from the split operation and use it as the name.
+        let name = parts.get(0).map(|&n| n.trim()).unwrap_or("");
+
+        //  4. If the name is empty, then return the default of Person.
+        if name.is_empty() {
+            return Person::default();
+        }
+
+        // 5. Extract the other element from the split operation and parse it into a
+        //    `usize` as the age.
+
+        // If while parsing the age, something goes wrong, then return the default of
+        // Person Otherwise, then return an instantiated Person object with the results
+        let age_str = parts.get(1).copied().unwrap_or_default();
+
+        let age_result = age_str.parse::<usize>();
+
+        let age = match age_result {
+            Ok(value) => value,
+            Err(_) => return Person::default(),
+        };
+
+        Person {
+            name: name.to_string(),
+            age,
+        }
     }
 }
 

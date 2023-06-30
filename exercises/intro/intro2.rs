@@ -5,8 +5,8 @@
 // Execute `rustlings hint intro2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
+// `&str` is a string that can be refrenced
 fn main() {
-    println!("Hello {}!");
+    let world: &str = "World";
+    println!("Hello {}!", world);
 }
