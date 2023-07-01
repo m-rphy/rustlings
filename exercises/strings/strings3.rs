@@ -3,21 +3,28 @@
 // Execute `rustlings hint strings3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 fn trim_me(input: &str) -> String {
-    // TODO: Remove whitespace from both ends of a string!
-    ???
+    // Remove whitespace from both ends of a string!
+
+    // NOTE -  the `trim` method returns a borrowed string slice (`&str`), 
+    //          not an owned `String` object.
+    input.trim().to_string() // the conventional choice
+
+    // This will compile 
+    // input.trim().to_owned() // Acheives the same thing, but not common
 }
 
 fn compose_me(input: &str) -> String {
-    // TODO: Add " world!" to the string! There's multiple ways to do this!
-    ???
+    // Add " world!" to the string! There's multiple ways to do this!
+    input.to_string() + " world!"
 }
 
 fn replace_me(input: &str) -> String {
-    // TODO: Replace "cars" in the string with "balloons"!
-    ???
+    // Replace "cars" in the string with "balloons"!
+
+    // NOTE -  the `replace()` method returns a new `String` object directly
+    input.replace("cars", "balloons")//.to_string()
 }
 
 #[cfg(test)]

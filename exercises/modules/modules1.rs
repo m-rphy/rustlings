@@ -3,7 +3,9 @@
 // Execute `rustlings hint modules1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+// Everything is private in Rust by default-- `pub` is a keyword we can use
+// to make something public! The compiler error should point to the thing that
+// needs to be public
 
 mod sausage_factory {
     // Don't let anybody outside of this module see this!
@@ -11,7 +13,8 @@ mod sausage_factory {
         String::from("Ginger")
     }
 
-    fn make_sausage() {
+    // pub makes this function public
+    pub fn make_sausage() {
         get_secret_recipe();
         println!("sausage!");
     }
