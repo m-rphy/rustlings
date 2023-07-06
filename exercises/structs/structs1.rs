@@ -7,7 +7,7 @@
 
 
 struct ColorClassicStruct {
-    // TODO: Something goes here
+    // value and it's type
     red: u8,
     green: u8,
     blue:u8,

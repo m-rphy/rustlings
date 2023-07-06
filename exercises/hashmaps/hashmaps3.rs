@@ -14,12 +14,12 @@
 // Execute `rustlings hint hashmaps3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 use std::collections::HashMap;
 
 // A structure to store the goal details of a team.
 struct Team {
+    name: String,
     goals_scored: u8,
     goals_conceded: u8,
 }
@@ -29,9 +29,12 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
     let mut scores: HashMap<String, Team> = HashMap::new();
 
     for r in results.lines() {
+
         let v: Vec<&str> = r.split(',').collect();
+
         let team_1_name = v[0].to_string();
         let team_1_score: u8 = v[2].parse().unwrap();
+
         let team_2_name = v[1].to_string();
         let team_2_score: u8 = v[3].parse().unwrap();
         // TODO: Populate the scores table with details extracted from the
@@ -39,6 +42,26 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // will be the number of goals conceded from team_2, and similarly
         // goals scored by team_2 will be the number of goals conceded by
         // team_1.
+
+        // Check if the team already exist in the scores table
+        for team_score in [(team_1_name, team_1_score, team_2_score), (team_2_name, team_2_score, team_1_score)] {
+            // match the the team name 
+            if let Some(team) = scores.get_mut(&team_score.0) {
+                // increment the team's score & the team conceded
+                team.goals_scored += team_score.1;;
+                team.goals_conceded += team_score.2;
+            } else {
+                scores.insert(team_score.0.clone(), Team{name: team_score.0, goals_scored: team_score.1, goals_conceded: team_score.2});
+            };
+        }
+        // for team_score in [(team_1_name,team_1_score,team_2_score),(team_2_name,team_2_score,team_1_score)]{
+        //     if let Some(team) = scores.get_mut(&team_score.0){
+        //         team.goals_scored = team.goals_scored+team_score.1;
+        //         team.goals_conceded = team.goals_conceded+team_score.2;
+        //     } else {
+        //         scores.insert(team_score.0.clone(),Team{name: team_score.0, goals_scored: team_score.1, goals_conceded: team_score.2});
+        //     };}
+
     }
     scores
 }
