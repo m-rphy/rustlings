@@ -7,11 +7,15 @@
 // Execute `rustlings hint errors3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+// By using `Result<(), ParseIntError>`, the code explicitly indicates 
+// that the main function may return an error of type `ParseIntError`.
+
+// Including `Ok(())` at the end of the main function is a convention that 
+// signifies a clean exit from the program
 
 use std::num::ParseIntError;
 
-fn main() {
+fn main() -> Result<(), ParseIntError> {
     let mut tokens = 100;
     let pretend_user_input = "8";
 
@@ -23,6 +27,7 @@ fn main() {
         tokens -= cost;
         println!("You now have {} tokens.", tokens);
     }
+    Ok(())
 }
 
 pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
