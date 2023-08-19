@@ -8,9 +8,8 @@
 // Execute `rustlings hint traits3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 pub trait Licensed {
+    // implemented default functionality
     fn licensing_info(&self) -> String {
         String::from("Some information")
     }
